@@ -12,5 +12,6 @@ def loadRooms():
                     }
                 }
     }
-    }
     return rooms
+
+print(loadRooms())
