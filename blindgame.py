@@ -19,13 +19,31 @@ def output(output):
     else:
         print(output)
 
+def changeRoom(room):
+    #logic to change room
+    return None
+
+def action(room, _action):
+    action = room.get("commands").get(_action)
+    if (action.get("valid") == "first"):
+        #change valid to none in savefile
+        pass
+    elif (action.get("valid") == "none"):
+        return None
+    atype = action.get("type").lower()
+    if (atype == "text"):
+        output(action.get("text"))
+    elif (atype == "exit"):
+        changeRoom(action.get("room"))
+    return(action)
+
 
 def startGame():
     #get room from save file. If no save, start at beginning
     newGame = 1
     if (newGame == 1):
         room = rooms.get(1)
-    return(room.get("commands").get("arrive"))
+    action(room, "arrive")    
 
 output(startGame())
 
