@@ -42,7 +42,7 @@ def startGame():
     #get room from save file. If no save, start at beginning
     newGame = 1
     if (newGame == 1):
-        room = rooms.get(1)
+        room = rooms.get("1")
     action(room, "arrive")    
 
 output(startGame())

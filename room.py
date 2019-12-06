@@ -1,8 +1,7 @@
 #functions (or classes) for rooms
 
 def loadRooms():
-    rooms = {}
-    rooms[1] = {"commands":{
+    rooms = {"1": {"commands":{
                     {"arrive": {"type": "text",
                                 "text": "You slowly open your eyes, despite a throbbing headache",
                                 "valid": "all"}
@@ -12,5 +11,6 @@ def loadRooms():
                             "valid" : "all"}
                         }
                 }
+    }
     }
     return rooms
