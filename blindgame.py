@@ -25,26 +25,35 @@ def changeRoom(room):
 
 def action(room, _action):
     action = room.get("commands").get(_action)
+    atype = action.get("type").lower()
+    if (action.get("type") == "alias"):
+        action = room.get("commands").get(_action.get("command"))
     if (action.get("valid") == "first"):
         #change valid to none in savefile
         pass
     elif (action.get("valid") == "none"):
         return None
-    atype = action.get("type").lower()
     if (atype == "text"):
         output(action.get("text"))
     elif (atype == "exit"):
         changeRoom(action.get("room"))
+    elif (atype == "get"):
+        output(action.get("text"))
+        #get object to inventory somehow
     else:
         return(action)
+
+
 
 
 def startGame():
     #get room from save file. If no save, start at beginning
     newGame = 1
+    #attempt load of save file, if fail assume new game. Otherwise load?
     if (newGame == 1):
         room = rooms.get("1")
-    action(room, "arrive")    
+    action(room, "arrive")
+    action(room, "help")
 
 startGame()
 
@@ -52,3 +61,7 @@ while (gameStatus == 1):
     cmd = input()
     if (cmd.lower() == "quit"):
         gameStatus = 0
+    else:
+        if (room.get("commands").get(cmd).get("type") == "alias"):
+            action(room, cmd)
+        
