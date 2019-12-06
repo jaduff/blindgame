@@ -35,7 +35,8 @@ def action(room, _action):
         output(action.get("text"))
     elif (atype == "exit"):
         changeRoom(action.get("room"))
-    return(action)
+    else:
+        return(action)
 
 
 def startGame():
@@ -45,7 +46,7 @@ def startGame():
         room = rooms.get("1")
     action(room, "arrive")    
 
-output(startGame())
+startGame()
 
 while (gameStatus == 1):
     cmd = input()
