@@ -23,11 +23,12 @@ def changeRoom(room):
     #logic to change room
     return None
 
-def action(room, _action):
-    action = room.get("commands").get(_action)
+def action(_room, _action):
+    action = _room.get("commands").get(_action)
     atype = action.get("type").lower()
     if (action.get("type") == "alias"):
-        action = room.get("commands").get(_action.get("command"))
+        action = _room.get("commands").get(action.get("command"))
+        atype = action.get("type").lower()
     if (action.get("valid") == "first"):
         #change valid to none in savefile
         pass
@@ -44,7 +45,14 @@ def action(room, _action):
         return(action)
 
 
-
+def gameLoop(room, gameStatus):
+    if (gameStatus == 1):
+        cmd = input().lower()
+        if (cmd == "quit"):
+            gameStatus = 0
+        else:
+            action(room, cmd)
+        gameLoop(room, gameStatus)
 
 def startGame():
     #get room from save file. If no save, start at beginning
@@ -54,14 +62,9 @@ def startGame():
         room = rooms.get("1")
     action(room, "arrive")
     action(room, "help")
+    gameLoop(room, 1)
 
 startGame()
 
-while (gameStatus == 1):
-    cmd = input()
-    if (cmd.lower() == "quit"):
-        gameStatus = 0
-    else:
-        if (room.get("commands").get(cmd).get("type") == "alias"):
-            action(room, cmd)
+
         

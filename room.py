@@ -25,6 +25,7 @@ def loadRooms():
                                 "item": "dowel_powel", #replace with uuid
                                 "valid": "once"}
                     }
+
                 }
     }
     return rooms
